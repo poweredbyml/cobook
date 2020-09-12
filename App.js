@@ -1,6 +1,9 @@
 import * as React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+
 import {
   DefaultTheme,
   Provider as PaperProvider,
@@ -9,6 +12,7 @@ import {
 } from "react-native-paper";
 
 import NotesScreen from "./components/Notes";
+import DoodleScreen from "./components/DoodleScreen";
 
 const theme = {
   ...DefaultTheme,
@@ -55,13 +59,26 @@ function App() {
   );
 }
 
-export default function Main() {
-  return (
-    <PaperProvider theme={theme}>
-      <App />
-    </PaperProvider>
-  );
-}
+// export default function Main() {
+//   return (
+
+//     <PaperProvider theme={theme}>
+//       <App />
+//     </PaperProvider>
+//   );
+// }
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Doodle: DoodleScreen,
+      Notes: NotesScreen,
+    },
+    {
+      initialRouteName: "Doodle",
+    }
+  )
+);
 
 const styles = StyleSheet.create({
   bottom: {
