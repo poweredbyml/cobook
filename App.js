@@ -5,6 +5,7 @@ import {
   DefaultTheme,
   Provider as PaperProvider,
   Appbar,
+  Share,
 } from "react-native-paper";
 
 import NotesScreen from "./components/Notes";
@@ -18,6 +19,16 @@ const theme = {
   },
 };
 
+const OnShare = async () => {
+  try {
+    const result = Share.share({
+      message: "A Note was shared",
+    });
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 function App() {
   return (
     <Appbar style={styles.bottom}>
@@ -25,7 +36,13 @@ function App() {
         icon="archive"
         onPress={() => console.log("Pressed archive")}
       />
-      <Appbar.Action icon="mail" onPress={() => console.log("Pressed mail")} />
+      <Appbar.Action
+        icon="mail"
+        onPress={() => {
+          console.log("Pressed mail");
+          OnShare;
+        }}
+      />
       <Appbar.Action
         icon="label"
         onPress={() => console.log("Pressed label")}
